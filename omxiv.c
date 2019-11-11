@@ -119,7 +119,7 @@ static int getImageListFromFile(char ***list, const char* path){
 	int lineLen = 0;
 	while ((read = getline(&line, &len, fp)) != -1) {
         	lineLen = strlen(line);
-		if(len>1) {
+		if(lineLen>1) {
 			imageList[i]= malloc(lineLen+1);
 			strncpy(imageList[i], line, lineLen);
 			if(imageList[i][lineLen-1] == '\n')
