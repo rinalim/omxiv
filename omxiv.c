@@ -6,6 +6,7 @@
 #include <signal.h>
 #include <dirent.h>
 #include <getopt.h>
+#include <errno.h>
 
 #include <sys/time.h>
 #include <sys/stat.h>
@@ -132,6 +133,7 @@ static int getImageListFromFile(char ***list, const char* path){
     	}
     	free(line);
 	i = 0;
+	fclose(fp);
 	
 	*list=malloc(sizeof(char*) *imageNum);
 	for(i=0; i<imageNum; i++) {
@@ -406,6 +408,10 @@ static void printVersion(){
 }
 
 int main(int argc, char *argv[]){
+	
+	struct stat sb;
+	time_t lastModified;
+	
 	int ret = 1;
 	long timeout = 0;
 
@@ -491,6 +497,13 @@ int main(int argc, char *argv[]){
 		imageNum=getImageFilesInDir(&files, "./");
 	}else if(filelist == 1){
 		imageNum=getImageListFromFile(&files, argv[optind]);
+		if (stat(argv[optind], &sb) == -1) {
+			perror("stat");
+		}
+		else {
+			memcpy(&lastModified, &sb.st_mtime, sizezof(time_t));
+		}
+	}
 	}else if(isDir(argv[optind])){
 		imageNum=getImageFilesInDir(&files, argv[optind]);
 	}else{
