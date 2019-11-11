@@ -503,7 +503,6 @@ int main(int argc, char *argv[]){
 		else {
 			memcpy(&lastModified, &sb.st_mtime, sizeof(time_t));
 		}
-	}
 	}else if(isDir(argv[optind])){
 		imageNum=getImageFilesInDir(&files, argv[optind]);
 	}else{
