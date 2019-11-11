@@ -51,7 +51,7 @@ static const struct option longOpts[] = {
 static ILCLIENT_T *client=NULL;
 static char end = 0;
 
-static char info = 0, blank = 0, soft = 0, keys = 1, center = 0, exifOrient = 1, mirror = 0;
+static char info = 0, blank = 0, soft = 0, keys = 1, center = 0, exifOrient = 1, mirror = 0, filelist =0;
 static uint32_t sWidth, sHeight;
 static int initRotation = 0, rotateInc = 90;
 
@@ -389,8 +389,7 @@ int main(int argc, char *argv[]){
 				printVersion();
 				return 0;
 			case 'f':
-				printVersion();
-				return 0;
+				filelist = 1; break;
 			case 't':
 				timeout = strtol(optarg, NULL, 10)*1000;
 				break;
@@ -452,6 +451,13 @@ int main(int argc, char *argv[]){
 	char **files;
 	if(argc-optind <= 0){
 		imageNum=getImageFilesInDir(&files, "./");
+	}else if(filelist == 1){
+		imageNum=1;
+		files = malloc(sizeof(char*) *imageNum);
+		char filename[200];
+		strcpy(filename, "/home/pi/png/next.png")
+		files[0]= malloc(strlen(filename)+1);
+		strcpy(files[0], filename);
 	}else if(isDir(argv[optind])){
 		imageNum=getImageFilesInDir(&files, argv[optind]);
 	}else{
