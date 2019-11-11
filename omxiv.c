@@ -104,19 +104,34 @@ static int imageFilter(const struct dirent *entry){
 }
 
 static int getImageListFromFile(char ***list, const char* path){
-	int imageNum;
-	imageNum=1;
-	if (imageNum < 0)
-		return imageNum;
-	else {
-		*list=malloc(sizeof(char*) *imageNum);
-		char filename[200];
-		strcpy(filename, "/home/pi/png/next.png");
-		int i;
-		for(i=0; i<imageNum; i++) {
-			(*list)[i]= malloc(strlen(filename)+1);
-			strcpy((*list)[i], filename);
+	int imageNum = 0;
+	char *imageList[100];	// support up to 100 images
+	FILE *fp = fopen(path, "r");
+	
+	if(fp == NULL)
+		return 0;
+
+	char *line = NULL;
+    	size_t len = 0;
+    	ssize_t read;
+	
+	int i = 0;
+	while ((read = getline(&line, &len, fp)) != -1) {
+        	if(len>1) {
+			imageList[i]= malloc(len+1);
+			strcpy(imageList[i], line);
+			imageNum++;
 		}
+		else
+			break;
+    	}
+    	free(line);
+	i = 0;
+	
+	*list=malloc(sizeof(char*) *imageNum);
+	for(i=0; i<imageNum; i++) {
+		(*list)[i]= malloc(strlen(imageList[i])+1);
+		strcpy((*list)[i], imageList[i]);
 	}
 	return imageNum;
 }
