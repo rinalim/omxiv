@@ -118,11 +118,11 @@ static int getImageListFromFile(char ***list, const char* path){
 	int i = 0;
 	while ((read = getline(&line, &len, fp)) != -1) {
         	if(len>1) {
-			imageList[i]= malloc(len+1);
-			strcpy(imageList[i], line);
+			imageList[i]= malloc(strlen(line)+1);
+			strncpy(imageList[i], line, strlen(line));
 			if(imageList[i][len-1] == '\n')
 				imageList[i][len-1] = '\0';
-			printf("%s\n",imageList[i]);
+			printf("%d, %s\n", strlen(line), imageList[i]);
 			imageNum++;
 		}
 		else
