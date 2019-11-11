@@ -501,7 +501,7 @@ int main(int argc, char *argv[]){
 			perror("stat");
 		}
 		else {
-			memcpy(&lastModified, &sb.st_mtime, sizezof(time_t));
+			memcpy(&lastModified, &sb.st_mtime, sizeof(time_t));
 		}
 	}
 	}else if(isDir(argv[optind])){
