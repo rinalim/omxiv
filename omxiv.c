@@ -120,6 +120,8 @@ static int getImageListFromFile(char ***list, const char* path){
         	if(len>1) {
 			imageList[i]= malloc(len+1);
 			strcpy(imageList[i], line);
+			if(imageList[i][len-1] == '\n')
+				imageList[i][len-1] = '\0';
 			printf("%s\n",imageList[i]);
 			imageNum++;
 		}
