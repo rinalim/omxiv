@@ -455,7 +455,7 @@ int main(int argc, char *argv[]){
 		imageNum=1;
 		files = malloc(sizeof(char*) *imageNum);
 		char filename[200];
-		strcpy(filename, "/home/pi/png/next.png")
+		strcpy(filename, "/home/pi/png/next.png");
 		files[0]= malloc(strlen(filename)+1);
 		strcpy(files[0], filename);
 	}else if(isDir(argv[optind])){
