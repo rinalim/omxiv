@@ -30,7 +30,8 @@ static const char magNumTifBE[] = {0x4d, 0x4d, 0x00, 0x2a};
 
 static const struct option longOpts[] = {
 	{"help", no_argument, 0, 'h'},
-	{"file-list", no_argument, 0, 'f'},
+	{"version", no_argument, 0, 'v'},
+	{"filelist-input", no_argument, 0, 'f'},
 	{"blank", no_argument, 0, 'b'},
 	{"transition", required_argument, 0, 'T'},
 	{"duration", required_argument, 0, 0x101},
@@ -377,16 +378,16 @@ int main(int argc, char *argv[]){
 		keys=0;
 	
 	int opt;
-	while((opt = getopt_long(argc, argv, "hft:bT:a:o:ml:d:iks", 
+	while((opt = getopt_long(argc, argv, "hvft:bT:a:o:ml:d:iks", 
 			longOpts, NULL)) != -1){
 		
 		switch(opt){
 			case 'h':
 				printUsage();
 				return 0;
-			//case 'v':
-			//	printVersion();
-			//	return 0;
+			case 'v':
+				printVersion();
+				return 0;
 			case 'f':
 				printVersion();
 				return 0;
