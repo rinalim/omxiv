@@ -116,13 +116,15 @@ static int getImageListFromFile(char ***list, const char* path){
     	ssize_t read;
 	
 	int i = 0;
+	int lineLen = 0;
 	while ((read = getline(&line, &len, fp)) != -1) {
-        	if(len>1) {
-			imageList[i]= malloc(strlen(line)+1);
-			strncpy(imageList[i], line, strlen(line));
-			if(imageList[i][strlen(line)-1] == '\n')
-				imageList[i][strlen(line)-1] = '\0';
-			printf("%d:%d, %s\n", len, strlen(line), imageList[i]);
+        	lineLen = strlen(line);
+		if(len>1) {
+			imageList[i]= malloc(lineLen+1);
+			strncpy(imageList[i], line, lineLen);
+			if(imageList[i][lineLen-1] == '\n')
+				imageList[i][lineLen-1] = '\0';
+			printf("%d:%d, %s\n", lineLen, imageList[i]);
 			imageNum++;
 		}
 		else
