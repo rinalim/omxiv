@@ -28,7 +28,7 @@ OPTIONS:
 
     -h  --help                   Print this help
     -v  --version                Show version info
-    -f  --flielist               Get image lists from a file
+    -f  --flielist               Get a image list from a file
     -t                  n        Time in s between 2 images in a slide show
     -b  --blank                  Set background to black
     -T  --transition   type      type: none(default), blend
