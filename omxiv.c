@@ -126,6 +126,7 @@ static int getImageListFromFile(char ***list, const char* path){
 				imageList[i][lineLen-1] = '\0';
 			printf("%d, %s\n", lineLen, imageList[i]);
 			imageNum++;
+			i++;
 		}
 		else
 			break;
