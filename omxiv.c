@@ -103,7 +103,7 @@ static int imageFilter(const struct dirent *entry){
 		return 0;
 }
 
-static int getImageListFromFile(char ***list){
+static int getImageListFromFile(char ***list, const char* path){
 	int imageNum;
 	imageNum=1;
 	if (imageNum < 0)
