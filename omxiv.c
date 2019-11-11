@@ -124,7 +124,6 @@ static int getImageListFromFile(char ***list, const char* path){
 			strncpy(imageList[i], line, lineLen);
 			if(imageList[i][lineLen-1] == '\n')
 				imageList[i][lineLen-1] = '\0';
-			printf("%d, %s\n", lineLen, imageList[i]);
 			imageNum++;
 			i++;
 		}
