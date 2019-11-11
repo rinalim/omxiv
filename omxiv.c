@@ -103,6 +103,24 @@ static int imageFilter(const struct dirent *entry){
 		return 0;
 }
 
+static int getImageListFromFile(char ***list){
+	int imageNum;
+	imageNum=1;
+	if (imageNum < 0)
+		return imageNum;
+	else {
+		*list=malloc(sizeof(char*) *imageNum);
+		char filename[200];
+		strcpy(filename, "/home/pi/png/next.png");
+		int i;
+		for(i=0; i<imageNum; i++) {
+			(*list)[i]= malloc(strlen(filename)+1);
+			strcpy((*list)[i], filename);
+		}
+	}
+	return imageNum;
+}
+
 static int getImageFilesInDir(char ***list, const char* path){
 	struct dirent **namelist;
 	int imageNum;
@@ -452,12 +470,7 @@ int main(int argc, char *argv[]){
 	if(argc-optind <= 0){
 		imageNum=getImageFilesInDir(&files, "./");
 	}else if(filelist == 1){
-		imageNum=1;
-		files = malloc(sizeof(char*) *imageNum);
-		char filename[200];
-		strcpy(filename, "/home/pi/png/next.png");
-		files[0]= malloc(strlen(filename)+1);
-		strcpy(files[0], filename);
+		imageNum=getImageListFromFile(&files, argv[optind]);
 	}else if(isDir(argv[optind])){
 		imageNum=getImageFilesInDir(&files, argv[optind]);
 	}else{
