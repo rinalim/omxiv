@@ -584,7 +584,7 @@ int main(int argc, char *argv[]){
 		}
 		if(filelist == 1) {
 			time(&curTime);
-			if(memcmp(lastModified, curTime, sizeof(time_t)))
+			if(memcmp(&lastModified, &curTime, sizeof(time_t)))
 				printf("File changed\n");
 		}
 		if(timeout != 0 && imageNum > 1 && !paused){
