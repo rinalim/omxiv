@@ -410,7 +410,7 @@ static void printVersion(){
 int main(int argc, char *argv[]){
 	
 	struct stat sb;
-	time_t lastModified, curTime;
+	time_t lastModified;
 	
 	int ret = 1;
 	long timeout = 0;
@@ -583,9 +583,13 @@ int main(int argc, char *argv[]){
 			usleep(20000);
 		}
 		if(filelist == 1) {
-			time(&curTime);
-			if(memcmp(&lastModified, &curTime, sizeof(time_t)))
+			if (stat(argv[optind], &sb) == -1) {
+				perror("stat");
+			}
+			else if(memcmp(&lastModified, &sb.st_mtime, sizeof(time_t))) {
+				memcpy(&lastModified, &sb.st_mtime, sizeof(time_t));
 				printf("File changed\n");
+			}
 		}
 		if(timeout != 0 && imageNum > 1 && !paused){
 			cTime = getCurrentTimeMs();
