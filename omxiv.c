@@ -589,6 +589,15 @@ int main(int argc, char *argv[]){
 			else if(memcmp(&lastModified, &sb.st_mtime, sizeof(time_t))) {
 				memcpy(&lastModified, &sb.st_mtime, sizeof(time_t));
 				printf("File changed\n");
+				imageNum=getImageListFromFile(&files, argv[optind]);
+				i=0;
+				stopAnimation(pCurRender);
+				ret=decodeImage(files[i], &image, &anim);
+				if(ret==0){
+					lShowTime = getCurrentTimeMs();
+					if(renderImage(&image, &anim) != 0)
+						break;
+				}
 			}
 		}
 		if(timeout != 0 && imageNum > 1 && !paused){
