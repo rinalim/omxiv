@@ -583,7 +583,7 @@ int main(int argc, char *argv[]){
 			usleep(20000);
 		}
 		if(filelist == 1) {
-			time(&curTime)
+			time(&curTime);
 			if(memcmp(lastModified, curTime, sizeof(time_t)))
 				printf("File changed\n");
 		}
