@@ -589,10 +589,10 @@ int main(int argc, char *argv[]){
 			//else if(memcmp(&lastModified, &sb.st_mtime, sizeof(time_t))) {
 			//	memcpy(&lastModified, &sb.st_mtime, sizeof(time_t));
 			else if(sb.st_size != 0) {
+				imageNum=getImageListFromFile(&files, argv[optind]);
 				FILE *fp = fopen(argv[optind], "w");
 				fclose(fp);
-				printf("File changed\n");
-				imageNum=getImageListFromFile(&files, argv[optind]);
+				printf("File input detected\n");
 				i=0;
 				stopAnimation(pCurRender);
 				ret=decodeImage(files[i], &image, &anim);
