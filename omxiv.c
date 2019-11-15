@@ -366,7 +366,7 @@ static void blankBackground(const int imageLayer, const int displayNum){
 	DISPMANX_RESOURCE_HANDLE_T resource;
 	uint32_t vc_image_ptr;
 	VC_IMAGE_TYPE_T type = VC_IMAGE_RGB565;
-	uint16_t image = 0xF000; // black
+	uint16_t image = 0x0007; // black
 	int layer = imageLayer-1;
 
 	VC_RECT_T dst_rect, src_rect;
