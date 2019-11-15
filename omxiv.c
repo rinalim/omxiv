@@ -586,8 +586,11 @@ int main(int argc, char *argv[]){
 			if (stat(argv[optind], &sb) == -1) {
 				perror("stat");
 			}
-			else if(memcmp(&lastModified, &sb.st_mtime, sizeof(time_t))) {
-				memcpy(&lastModified, &sb.st_mtime, sizeof(time_t));
+			//else if(memcmp(&lastModified, &sb.st_mtime, sizeof(time_t))) {
+			//	memcpy(&lastModified, &sb.st_mtime, sizeof(time_t));
+			else if(sb.st_size != 0) {
+				FILE *fp = fopen(argv[optind], "w");
+				fclose(fp);
 				printf("File changed\n");
 				imageNum=getImageListFromFile(&files, argv[optind]);
 				i=0;
