@@ -501,7 +501,9 @@ int main(int argc, char *argv[]){
 			perror("stat");
 		}
 		else {
-			memcpy(&lastModified, &sb.st_mtime, sizeof(time_t));
+			//memcpy(&lastModified, &sb.st_mtime, sizeof(time_t));
+			FILE *fp = fopen(argv[optind], "w");
+			fclose(fp);	
 		}
 	}else if(isDir(argv[optind])){
 		imageNum=getImageFilesInDir(&files, argv[optind]);
@@ -593,6 +595,7 @@ int main(int argc, char *argv[]){
 				FILE *fp = fopen(argv[optind], "w");
 				fclose(fp);
 				printf("File input detected\n");
+				free(image.pData);
 				i=0;
 				stopAnimation(pCurRender);
 				ret=decodeImage(files[i], &image, &anim);
