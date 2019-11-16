@@ -123,6 +123,7 @@ static int getImageListFromFile(char ***list, const char* path){
 		if(lineLen>1) {
 			imageList[i]= malloc(lineLen+1);
 			strncpy(imageList[i], line, lineLen);
+			printf("file: %s\n", imageList[i]);
 			if(imageList[i][lineLen-1] == '\n')
 				imageList[i][lineLen-1] = '\0';
 			imageNum++;
@@ -132,9 +133,8 @@ static int getImageListFromFile(char ***list, const char* path){
 			break;
     	}
     	free(line);
-	i = 0;
 	fclose(fp);
-	
+
 	*list=malloc(sizeof(char*) *imageNum);
 	for(i=0; i<imageNum; i++) {
 		(*list)[i]= malloc(strlen(imageList[i])+1);
@@ -594,7 +594,7 @@ int main(int argc, char *argv[]){
 				imageNum=getImageListFromFile(&files, argv[optind]);
 				FILE *fp = fopen(argv[optind], "w");
 				fclose(fp);
-				//printf("File input detected\n");
+				printf("File input detected\n");
 				free(image.pData);
 				i=0;
 				stopAnimation(pCurRender);
