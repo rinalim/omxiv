@@ -603,6 +603,7 @@ int main(int argc, char *argv[]){
 					lShowTime = getCurrentTimeMs();
 					if(renderImage(&image, &anim) != 0)
 						break;
+					usleep(100000);
 				}
 			}
 		}
