@@ -123,9 +123,9 @@ static int getImageListFromFile(char ***list, const char* path){
 		if(lineLen>1) {
 			imageList[i]= malloc(lineLen+1);
 			strncpy(imageList[i], line, lineLen);
-			printf("file: %s\n", imageList[i]);
 			if(imageList[i][lineLen-1] == '\n')
 				imageList[i][lineLen-1] = '\0';
+			printf("file: %s\n", imageList[i]);
 			imageNum++;
 			i++;
 		}
@@ -594,16 +594,18 @@ int main(int argc, char *argv[]){
 				imageNum=getImageListFromFile(&files, argv[optind]);
 				FILE *fp = fopen(argv[optind], "w");
 				fclose(fp);
-				printf("File input detected\n");
-				free(image.pData);
-				i=0;
-				stopAnimation(pCurRender);
-				ret=decodeImage(files[i], &image, &anim);
-				if(ret==0){
-					lShowTime = getCurrentTimeMs();
-					if(renderImage(&image, &anim) != 0)
-						break;
-					//usleep(100000);
+				if(imageNum > 0){
+					printf("File loading..\n\n");
+					free(image.pData);
+					i=0;
+					stopAnimation(pCurRender);
+					ret=decodeImage(files[i], &image, &anim);
+					if(ret==0){
+						lShowTime = getCurrentTimeMs();
+						if(renderImage(&image, &anim) != 0)
+							break;
+						//usleep(100000);
+					}
 				}
 			}
 		}
