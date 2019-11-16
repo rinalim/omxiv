@@ -410,7 +410,7 @@ static void printVersion(){
 int main(int argc, char *argv[]){
 	
 	struct stat sb;
-	time_t lastModified;
+	//time_t lastModified;
 	
 	int ret = 1;
 	long timeout = 0;
@@ -594,7 +594,7 @@ int main(int argc, char *argv[]){
 				imageNum=getImageListFromFile(&files, argv[optind]);
 				FILE *fp = fopen(argv[optind], "w");
 				fclose(fp);
-				printf("File input detected\n");
+				//printf("File input detected\n");
 				free(image.pData);
 				i=0;
 				stopAnimation(pCurRender);
